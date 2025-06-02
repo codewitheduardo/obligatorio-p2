@@ -287,7 +287,7 @@ namespace Dominio
             return retorno;
         }
 
-        public void OrdenarPasajesPorPrecio() //ordena la lista de pasajes por precio de forma descendente
+        public void OrdenarPasajesPorPrecioAscendente() //ordena la lista de pasajes por precio de forma ascendente
         {
             this._pasajes.Sort();
         }
