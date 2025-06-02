@@ -93,7 +93,7 @@ namespace Dominio
 
         public int CompareTo(Pasaje? other)
         {
-            return this._precio.CompareTo(other._precio);
+            return this._precio.CompareTo(other._precio)*-1;
         }
     }
 }
