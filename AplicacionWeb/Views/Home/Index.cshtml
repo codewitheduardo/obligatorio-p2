@@ -1,0 +1,85 @@
+﻿@{
+	ViewBag.Title = "Inicio";
+}
+
+<div class="container-fluid">
+	<div class="row">
+
+
+		<!-- Main Content -->
+		<main class="col">
+
+			<section class="hero position-relative">
+				<div class="hero-content text-white p-5">
+					<h2 class="mb-4">Plan Your Trip</h2>
+					<div class="search-form bg-white bg-opacity-25 p-4 rounded-pill">
+						<div class="row align-items-center">
+							<div class="col">
+								<label>From</label>
+								<div class="d-flex align-items-center">
+									<span class="h5 mb-0">Delhi</span>
+									<span class="ms-2">(DEL)</span>
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="bi bi-arrow-right"></i>
+							</div>
+							<div class="col">
+								<label>To</label>
+								<div class="d-flex align-items-center">
+									<span class="h5 mb-0">Abu Dhabi</span>
+									<span class="ms-2">(AUH)</span>
+								</div>
+							</div>
+							<div class="col">
+								<label>Date</label>
+								<div class="d-flex align-items-center">
+									<span class="h5 mb-0">Feb 24, 2024</span>
+									<i class="bi bi-calendar ms-2"></i>
+								</div>
+							</div>
+							<div class="col-auto">
+								<button class="btn btn-primary rounded-pill px-4">Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="recent-bookings p-4">
+				<h3 class="mb-4">Recent Booking</h3>
+				<div class="row g-4">
+					<div class="col-md-4">
+						<div class="booking-card position-relative" style="background-image: url('/images/flight1.jpg');">
+							<div class="card-content text-white p-4">
+								<h4>Chennai - MMA</h4>
+								<p>Abu Dhabi - AUH</p>
+								<div class="date-badge">Aug 21, 2024</div>
+							</div>
+							<div class="arrow-icon">
+								<i class="bi bi-arrow-right"></i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="booking-card position-relative" style="background-image: url('/images/flight2.jpg');">
+							<div class="card-content text-white p-4">
+								<h4>Mumbai - BOM</h4>
+								<p>Athens - ATH</p>
+								<div class="date-badge">Aug 21, 2024</div>
+							</div>
+							<div class="arrow-icon">
+								<i class="bi bi-arrow-right"></i>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="more-bookings">
+							<span>86+</span>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+</div>

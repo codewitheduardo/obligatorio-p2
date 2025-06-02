@@ -1,0 +1,355 @@
+﻿:root {
+    --primary-color: #0093ff;
+    --secondary-color: #ffe500;
+    --bg-light: #f3f3f3;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    background-color: #fff;
+    height: 100%;
+    margin: 0;
+}
+
+/* Sidebar */
+.sidebar-menu {
+    font-size: 16.5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 550;
+    font-style: normal;
+    background-color: var(--bg-light);
+}
+
+.header-sidebar {
+    font-family: 'Inter', sans-serif;
+    background-color: #0275d8;
+}
+
+.sidebar-menu a {
+    transition: transform 0.2s;
+}
+
+    .sidebar-menu a:hover {
+        transform: scale(1.05);
+    }
+
+.sidebar-footer {
+    transition: transform 0.2s;
+}
+
+    .sidebar-footer:hover {
+        transform: scale(1.03);
+    }
+
+.nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 6px;
+    width: 3px;
+    height: 41px;
+    background-color: var(--primary-color);
+}
+
+.nav-text {
+    display: block;
+    font-size: 0.90rem;
+    margin-top: 3px;
+}
+
+/* Header */
+header {
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+}
+
+    header img {
+        height: 70px;
+        filter: brightness(0) saturate(100%) invert(35%) sepia(100%) saturate(2377%) hue-rotate(200deg) brightness(96%) contrast(102%);
+    }
+
+.search-bar {
+    background-color: var(--bg-light);
+    padding: 0.60rem 1.5rem;
+    border-radius: 36px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+    .search-bar input {
+        outline: none;
+        width: 100%;
+    }
+
+.header-nav a {
+    text-decoration: none;
+    margin-left: 3rem;
+    font-size: 1.15rem;
+}
+
+    .header-nav a.active {
+        color: black;
+        font-weight: 500;
+    }
+
+.hover-zoom {
+    transition: transform 0.2s ease;
+}
+
+    .hover-zoom:hover {
+        transform: scale(1.15);
+    }
+
+main {
+    margin-top: 17.5vh;
+}
+
+.aeropuerto-search {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.aeropuerto-search-input {
+    border: 2px solid #0d6efd;
+    border-right: none;
+    border-radius: 50px 0 0 50px;
+    padding: 10px 15px;
+    flex: 1;
+    outline: none;
+    font-size: 1rem;
+}
+
+    .aeropuerto-search-input::placeholder {
+        color: #bcbcbc;
+    }
+
+.aeropuerto-search-button {
+    background-color: #0d6efd;
+    border: 2px solid #0d6efd;
+    border-radius: 0 50px 50px 0;
+    padding: 0.55rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .aeropuerto-search-button i {
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .aeropuerto-search-button:hover {
+        background-color: #0a58ca;
+        transform: scale(1.05);
+    }
+
+/* Hero Section */
+.hero {
+    background-image: url('../images/view-3d-airplane-1.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 477px;
+    border-radius: 50px;
+    margin: 1rem;
+    position: relative;
+}
+
+.hero-content {
+    padding-top: 126px;
+}
+
+.search-form {
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+}
+
+    .search-form label {
+        font-size: 0.8rem;
+        opacity: 0.75;
+    }
+
+    .search-form .h5 {
+        font-weight: 600;
+    }
+
+/* Booking Cards */
+.booking-card {
+    height: 322px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+    .booking-card:nth-child(1) {
+        background-image: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg');
+    }
+
+    .booking-card:nth-child(2) {
+        background-image: url('https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg');
+    }
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+}
+
+.date-badge {
+    background-color: var(--secondary-color);
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    color: black;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.9rem;
+}
+
+.arrow-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    width: 91px;
+    height: 85px;
+    border-radius: 40px 0 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* More bookings circle */
+.more-bookings {
+    width: 109px;
+    height: 109px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.75);
+    margin-top: 106px;
+}
+
+.table-container {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+}
+
+/* Tablas */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem; /* Más compacto */
+    text-align: center;
+    min-width: unset;
+    border: 1px solid #dee2e6;
+}
+
+    .table thead {
+        background-color: #000;
+        color: white;
+    }
+
+        .table thead th {
+            padding: 0.7rem; /* Más compacto */
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #f8f8f8;
+    }
+
+    .table tbody tr:hover {
+        background-color: #e9ecef;
+        transition: background-color 0.2s ease;
+    }
+
+    .table tbody td {
+        border: 1px solid #dee2e6; /* bordes internos */
+        padding: 0.8rem; /* Reduce altura de fila */
+        vertical-align: middle;
+    }
+
+.icono-comprar {
+    text-decoration: none;
+    transition: transform 0.2s;
+    color: #000;
+    display: flex;
+    justify-content: center;
+}
+
+    .icono-comprar .material-symbols-outlined {
+        font-size: 1.8rem;
+        transition: transform 0.2s;
+    }
+
+    .icono-comprar:hover .material-symbols-outlined {
+        transform: scale(1.15);
+        color: #000;
+    }
+
+/* Footer */
+footer {
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+    footer a {
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    header {
+        flex-wrap: wrap;
+    }
+
+    .search-bar {
+        order: 3;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+        .search-bar input {
+            width: 100%;
+        }
+
+    .header-nav {
+        order: 2;
+        width: 100%;
+        margin-top: 0.5rem;
+        justify-content: center;
+    }
+
+    .sidebar-menu {
+        max-width: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}

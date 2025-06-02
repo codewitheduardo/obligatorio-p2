@@ -1,0 +1,47 @@
+﻿@using Dominio
+@model List<Vuelo>
+
+@{
+	ViewBag.Title = "Panel de Vuelos";
+}
+
+<div class="py-5">
+	<h2 class="text-center text-primary fs-1">Panel de Vuelos</h2>
+</div>
+
+<div class="table-container ms-5 me-5 mb-5">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Frecuencia</th>
+				<th>Origen</th>
+				<th>Destino</th>
+				<th>Avión</th>
+				<th>Vuelo</th>
+				<th>Precio</th>
+				<th>Comprar</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Vuelo vuelo in Model)
+			{
+				<tr>
+					<td>@String.Join(", ", vuelo.Frecuencia)</td>
+					<td>@vuelo.Ruta.Salida.Ciudad</td>
+					<td>@vuelo.Ruta.Llegada.Ciudad</td>
+					<td>@vuelo.Avion.Modelo</td>
+					<td>@vuelo.Numero</td>
+					<td>$ @vuelo.ObtenerCostoPorAsiento().ToString("F2")</td>
+					<td>
+						<a asp-controller="Vuelos" asp-action="Comprar" asp-route-id="@vuelo.Numero"
+						   class="icono-comprar">
+							<span class="material-symbols-outlined">
+								shopping_cart_checkout
+							</span>
+						</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
