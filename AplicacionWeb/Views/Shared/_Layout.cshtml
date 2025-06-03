@@ -161,32 +161,6 @@
 		</div>
 	</footer>
 
-
-	<!-- JS -->
-	<script>
-		document.getElementById("menu-toggle").addEventListener("click", function () {
-			document.getElementById("sidebar-menu").style.transform = "translateX(0)";
-			document.body.classList.add("sidebar-open");
-		});
-
-		document.getElementById("close-sidebar").addEventListener("click", function () {
-			document.getElementById("sidebar-menu").style.transform = "translateX(-100%)";
-			document.body.classList.remove("sidebar-open");
-		});
-
-		document.addEventListener("click", function (event) {
-			const sidebar = document.getElementById("sidebar-menu");
-			const toggleButton = document.getElementById("menu-toggle");
-			const isClickInsideSidebar = sidebar.contains(event.target);
-			const isClickOnToggle = toggleButton.contains(event.target);
-
-			if (!isClickInsideSidebar && !isClickOnToggle) {
-				sidebar.style.transform = "translateX(-100%)";
-				document.body.classList.remove("sidebar-open");
-			}
-		});
-	</script>
-
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
