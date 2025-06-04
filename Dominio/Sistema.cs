@@ -252,13 +252,14 @@ namespace Dominio
             return retorno;
         }
 
-        public List<Vuelo> ListarVuelosPorAeropuerto(string codigo) //recorre vuelos y retorna una lista de vuelos por aeropuertos especificos
+        public List<Vuelo> ListarVuelosPorAeropuertos(string codSalida, string codLlegada) //recorre vuelos y retorna una lista de vuelos por aeropuertos especificos
         {
             List<Vuelo> retorno = new List<Vuelo>();
 
             foreach (Vuelo vuelo in this._vuelos)
             {
-                if (vuelo.Ruta.Salida.Codigo == codigo || vuelo.Ruta.Llegada.Codigo == codigo)
+                if ((string.IsNullOrWhiteSpace(codSalida) || vuelo.Ruta.Salida.Codigo.ToUpper() == codSalida.ToUpper()) &&
+                    (string.IsNullOrWhiteSpace(codLlegada) || vuelo.Ruta.Llegada.Codigo.ToUpper() == codLlegada.ToUpper()))
                 {
                     retorno.Add(vuelo);
                 }

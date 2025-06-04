@@ -28,3 +28,28 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const formContainer = document.getElementById("searchFormContainer");
+    const toggleButton = document.getElementById("toggleFormBtn");
+    const form = formContainer.querySelector("form");
+
+    toggleButton.addEventListener("click", function (event) {
+        event.stopPropagation(); // Evita que el clic se propague y cierre el formulario inmediatamente
+        if (formContainer.classList.contains("hidden")) {
+            formContainer.classList.remove("hidden");
+        } else {
+            formContainer.classList.add("hidden");
+        }
+    });
+
+    document.addEventListener("click", function (event) {
+        const isClickInsideForm = formContainer.contains(event.target);
+        const isClickOnToggle = toggleButton.contains(event.target);
+
+        if (!isClickInsideForm && !isClickOnToggle) {
+            formContainer.classList.add("hidden");
+            form.reset(); // Limpia todos los campos del formulario
+        }
+    });
+});
