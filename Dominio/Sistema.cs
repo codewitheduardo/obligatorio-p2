@@ -270,8 +270,16 @@ namespace Dominio
         //Pasajes
         public void AgregarPasaje(Pasaje pasaje) //precarga de datos pasaje
         {
-            pasaje.Validar();
             this._pasajes.Add(pasaje);
+        }
+
+        public void EmitirPasaje(Vuelo vuelo, DateTime fecha, Equipaje equipaje)
+        {
+            Cliente cliente = (Cliente)Usuarios[3];
+
+            Pasaje pasaje = new Pasaje(vuelo, fecha, cliente, equipaje);
+            pasaje.Validar();
+            AgregarPasaje(pasaje);
         }
 
         public List<Pasaje> ListarPasajesPorFechas(DateTime fecha1, DateTime fecha2) //recorre pasajes y retorna una lista de pasajes dadas dos fechas específicas

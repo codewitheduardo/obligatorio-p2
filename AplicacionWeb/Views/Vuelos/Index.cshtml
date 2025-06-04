@@ -9,36 +9,41 @@
 	<h2 class="text-center text-primary fs-1">Panel de Vuelos</h2>
 </div>
 
+@if (ViewBag.Error != null)
+{
+	<div class="alert alert-danger text-center mb-5">@ViewBag.Error</div>
+}
+
 @if (ViewBag.Mensaje != null)
 {
-	<div class="alert alert-danger text-center mb-5">@ViewBag.Mensaje</div>
+	<div class="alert alert-success text-center mb-5">@ViewBag.Mensaje</div>
 }
 
 <!-- Botón flotante -->
 <button id="toggleFormBtn" class="floating-button" aria-label="Abrir buscador de vuelos" type="button">
-    <span class="material-symbols-outlined">search</span>
+	<span class="material-symbols-outlined">search</span>
 </button>
 
 <!-- Buscar Vuelos -->
 <div id="searchFormContainer" class="search-form-container hidden">
 	<div class="card p-4 mx-auto buscador-card">
-        <h4 class="mb-3 text-primary text-center">Buscar Vuelos</h4>
+		<h4 class="mb-3 text-primary text-center">Buscar Vuelos</h4>
 		<form method="get" action="~/Vuelos/Buscar" class="aeropuerto-search-vertical">
-            <div class="input-icon">
-                <span class="material-symbols-outlined icon">search</span>
-                <input type="text" name="codSalida" class="aeropuerto-search-input"
-                       placeholder="Código IATA del aeropuerto de salida (ej. EZE)" maxlength="3" />
-            </div>
-            <div class="input-icon">
-                <span class="material-symbols-outlined icon">search</span>
-                <input type="text" name="codLlegada" class="aeropuerto-search-input"
-                       placeholder="Código IATA del aeropuerto de llegada (ej. AEP)" maxlength="3" />
-            </div>
-            <button type="submit" class="aeropuerto-search-button">
-                <i class="bi bi-search"></i>
-            </button>
-        </form>
-    </div>
+			<div class="input-icon">
+				<span class="material-symbols-outlined icon">search</span>
+				<input type="text" name="codSalida" class="aeropuerto-search-input"
+					   placeholder="Código IATA del aeropuerto de salida (ej. EZE)" maxlength="3" />
+			</div>
+			<div class="input-icon">
+				<span class="material-symbols-outlined icon">search</span>
+				<input type="text" name="codLlegada" class="aeropuerto-search-input"
+					   placeholder="Código IATA del aeropuerto de llegada (ej. AEP)" maxlength="3" />
+			</div>
+			<button type="submit" class="aeropuerto-search-button">
+				<i class="bi bi-search"></i>
+			</button>
+		</form>
+	</div>
 </div>
 
 <div class="table-container ms-5 me-5 mb-5">
@@ -48,9 +53,11 @@
 				<th>Frecuencia</th>
 				<th>Origen</th>
 				<th>Destino</th>
-				<th>Avión</th>
 				<th>Vuelo</th>
 				<th>Precio</th>
+				<th>Equipaje</th>
+				<th>Fecha</th>
+				<th>Ver Detalle</th>
 				<th>Comprar</th>
 			</tr>
 		</thead>
@@ -58,20 +65,33 @@
 			@foreach (Vuelo vuelo in Model)
 			{
 				<tr>
+					<form method="get" action="/Pasaje/Comprar" class="form-tabla">
 					<td>@String.Join(", ", vuelo.Frecuencia)</td>
 					<td>@vuelo.Ruta.Salida.Ciudad</td>
 					<td>@vuelo.Ruta.Llegada.Ciudad</td>
-					<td>@vuelo.Avion.Modelo</td>
 					<td>@vuelo.Numero</td>
 					<td>$ @vuelo.ObtenerCostoPorAsiento().ToString("F2")</td>
 					<td>
-						<a asp-controller="Vuelos" asp-action="Comprar" asp-route-id="@vuelo.Numero"
-						   class="icono-comprar">
-							<span class="material-symbols-outlined">
-								shopping_cart_checkout
-							</span>
+						<select name="equipaje" class="form-select borde-redondo" required>
+							<option value="">...</option>
+							<option value="LIGHT">LIGHT</option>
+							<option value="CABINA">CABINA</option>
+							<option value="BODEGA">BODEGA</option>
+						</select>
+					</td>
+					<td><input type="date" name="fecha" class="form-control borde-redondo" required /></td>
+					<td>
+						<a href="/Vuelos/Detalle/@vuelo.Numero" class="icono-comprar">
+							<span class="material-symbols-outlined">info</span>
 						</a>
 					</td>
+					<td>
+						<input type="hidden" name="id" value="@vuelo.Numero" />
+						<button type="submit" class="icono-comprar boton-sin-estilo">
+							<span class="material-symbols-outlined">shopping_cart_checkout</span>
+						</button>
+					</td>
+					</form>
 				</tr>
 			}
 		</tbody>

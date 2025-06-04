@@ -6,8 +6,9 @@ namespace AplicacionWeb.Controllers
     public class VuelosController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
-        public IActionResult Index(string mensaje)
+        public IActionResult Index(string error, string mensaje)
         {
+            ViewBag.Error = error;
             ViewBag.Mensaje = mensaje;
             return View(this._sistema.Vuelos);
         }
@@ -17,22 +18,29 @@ namespace AplicacionWeb.Controllers
         {
             if (string.IsNullOrWhiteSpace(codSalida) && string.IsNullOrWhiteSpace(codLlegada))
             {
-                return RedirectToAction("Index", new { mensaje = "Debe ingresar al menos un código de aeropuerto para buscar." });
+                return RedirectToAction("Index", new { error = "Debe ingresar al menos un código de aeropuerto para buscar." });
             }
 
             List<Vuelo> vuelosFiltrados = this._sistema.ListarVuelosPorAeropuertos(codSalida, codLlegada);
 
             if (vuelosFiltrados.Count == 0)
             {
-                return RedirectToAction("Index", new { mensaje = "No se encontraron vuelos con los datos ingresados." });
+                return RedirectToAction("Index", new { error = "No se encontraron vuelos con los datos ingresados." });
             }
 
             return View("Index", vuelosFiltrados);
         }
 
-        public IActionResult Detalle()
+        [HttpGet]
+        public IActionResult Detalle(string id)
         {
-            return View();
+            Vuelo vuelo = this._sistema.ObtenerVuelo(id);
+
+            return View(vuelo);
         }
+
+        
+
+
     }
 }
