@@ -37,6 +37,11 @@ namespace Dominio
             get { return _pasajero; }
         }
 
+        public Equipaje Equipaje
+        {
+            get { return _equipaje; }
+        }
+
         public decimal Precio
         {
             get { return _precio; }
@@ -93,7 +98,7 @@ namespace Dominio
 
         public int CompareTo(Pasaje? other)
         {
-            return this._precio.CompareTo(other._precio);
+            return this._precio.CompareTo(other._precio) * -1;
         }
     }
 }

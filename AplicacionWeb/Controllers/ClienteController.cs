@@ -11,5 +11,10 @@ namespace AplicacionWeb.Controllers
         {
             return View(this._sistema.ListarClientesEnUsuarios()[0]);
         }
+
+        public IActionResult Registro()
+        {
+            return View();
+        }
     }
 }

@@ -290,6 +290,33 @@ form.compra-form {
         font-weight: 600;
     }
 
+.card-registro {
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.registro-header {
+    font-size: 1.15rem; 
+    font-weight: 600;
+    padding: 1rem 0;
+}
+
+.card-body-registro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.input-registro {
+    border-radius: 0.5rem;
+}
+
+.btn-registro {
+    width: 75%;
+    border-radius: 0.5rem;
+}
+
 /* Booking Cards */
 .booking-card {
     height: 322px;

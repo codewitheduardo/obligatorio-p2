@@ -1,0 +1,48 @@
+﻿@using Dominio
+
+@{
+    ViewBag.Title = "Registro";
+}
+
+<div class="py-5">
+    <h2 class="text-center text-primary fs-1">Registro</h2>
+</div>
+
+<div class="d-flex justify-content-center align-items-center pb-1">
+    <div class="card card-registro">
+        <form method="post" action="~/Usuario/Registrar" class="registro-form">
+            <h5 class="card-header text-center registro-header">
+                Te damos la bienvenida a Aero.
+            </h5>
+            <div class="card-body card-body-registro">
+
+                <div class="grupo-input mb-2 w-75">
+                    <small class="form-text text-muted">Ingrese su correo electrónico</small>
+                    <input type="email" name="email" class="form-control input-registro" required />
+                </div>
+
+                <div class="grupo-input mb-2 w-75">
+                    <small class="form-text text-muted">Cree una contraseña segura</small>
+                    <input type="password" name="password" class="form-control input-registro" required />
+                </div>
+
+                <div class="grupo-input mb-2 w-75">
+                    <small class="form-text text-muted">Ingrese su nombre completo</small>
+                    <input type="text" name="nombre" class="form-control input-registro" required />
+                </div>
+
+                <div class="grupo-input mb-2 w-75">
+                    <small class="form-text text-muted">Ingrese su número de documento</small>
+                    <input type="text" name="documento" class="form-control input-registro" required />
+                </div>
+
+                <div class="grupo-input mb-3 w-75">
+                    <small class="form-text text-muted">Ingrese su nacionalidad</small>
+                    <input type="text" name="nacionalidad" class="form-control input-registro" required />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-registro">Registrarse</button>
+            </div>
+        </form>
+    </div>
+</div>

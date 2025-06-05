@@ -7,7 +7,7 @@ namespace AplicacionWeb.Controllers
     {
         private Sistema _sistema = Sistema.Instancia;
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Comprar(string id, DateTime fecha, Equipaje equipaje)
         {
             try
@@ -20,6 +20,15 @@ namespace AplicacionWeb.Controllers
             {
                 return RedirectToAction("Index", "Vuelos", new { error = e.Message });
             }
+        }
+
+        public IActionResult MisPasajes()
+        {
+            this._sistema.OrdenarPasajesPorPrecio();
+
+            Cliente cliente = (Cliente)this._sistema.Usuarios[3];
+
+            return View(this._sistema.ObtenerPasajesPorCliente(cliente.Documento));
         }
     }
 }

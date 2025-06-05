@@ -65,7 +65,7 @@
 			@foreach (Vuelo vuelo in Model)
 			{
 				<tr>
-					<form method="get" action="/Pasaje/Comprar" class="form-tabla">
+					<form method="post" action="/Pasaje/Comprar" class="form-tabla">
 					<td>@String.Join(", ", vuelo.Frecuencia)</td>
 					<td>@vuelo.Ruta.Salida.Ciudad</td>
 					<td>@vuelo.Ruta.Llegada.Ciudad</td>
@@ -74,9 +74,9 @@
 					<td>
 						<select name="equipaje" class="form-select borde-redondo" required>
 							<option value="">...</option>
-							<option value="LIGHT">LIGHT</option>
-							<option value="CABINA">CABINA</option>
-							<option value="BODEGA">BODEGA</option>
+							@foreach (string equipaje in Enum.GetNames(typeof(Equipaje))) {
+								<option value="@equipaje">@equipaje</option>
+							}
 						</select>
 					</td>
 					<td><input type="date" name="fecha" class="form-control borde-redondo" required /></td>

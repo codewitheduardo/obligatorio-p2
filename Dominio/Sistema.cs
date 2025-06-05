@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -299,6 +300,25 @@ namespace Dominio
         public void OrdenarPasajesPorPrecio() //ordena la lista de pasajes por precio de forma descendente
         {
             this._pasajes.Sort();
+        }
+
+        public void OrdenarPasajesPorFecha()
+        {
+            this._pasajes.Sort(new Ordenes.OrdenPasajePorFecha());
+        }
+
+        public List<Pasaje> ObtenerPasajesPorCliente(string documento)
+        {
+            List<Pasaje> retorno = new List<Pasaje>();
+
+            foreach (Pasaje pasaje in this._pasajes)
+            {
+                if (pasaje.Pasajero.Documento == documento)
+                {
+                    retorno.Add(pasaje);
+                }
+            }
+            return retorno;
         }
 
         //Precargas

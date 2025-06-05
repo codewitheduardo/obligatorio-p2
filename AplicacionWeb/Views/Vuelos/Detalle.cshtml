@@ -10,7 +10,7 @@
 
 <div class="d-flex justify-content-center align-items-center pb-1">
     <div class="card card-compra">
-        <form method="get" action="~/Pasaje/Comprar/@Model.Numero" class="compra-form">
+        <form method="post" action="~/Pasaje/Comprar/@Model.Numero" class="compra-form">
             <h5 class="card-header text-center">@Model.Numero</h5>
             <div class="card-body card-body-centro">
                 <h5 class="card-title">@Model.Ruta.Salida.Codigo - @Model.Ruta.Llegada.Codigo</h5>
