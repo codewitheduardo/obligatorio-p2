@@ -54,6 +54,11 @@ namespace Dominio
 
         private void ValidarFecha()
         {
+            if (this._fecha == DateTime.MinValue)
+            {
+                throw new Exception("Debe de ingresar una fecha para realizar la compra");
+            }
+
             Dia diaPasaje = (Dia)this._fecha.DayOfWeek;
 
             if (!this._vuelo.Frecuencia.Contains(diaPasaje))

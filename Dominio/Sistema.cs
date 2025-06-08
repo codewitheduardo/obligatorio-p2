@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio.Ordenes;
 
 namespace Dominio
 {
@@ -114,7 +115,7 @@ namespace Dominio
             return retorno;
         }
 
-        public List<Cliente> ListarClientesEnUsuarios() //recorre usuarios y retorna una lista de clientes
+        public List<Cliente> ListarClientesEnUsuarios() //recorre usuarios y retorna una lista de clientes ordenados por documento
         {
             List<Cliente> retorno = new List<Cliente>();
 
@@ -302,9 +303,9 @@ namespace Dominio
             this._pasajes.Sort();
         }
 
-        public void OrdenarPasajesPorFecha()
+        public void OrdenarPasajesPorFecha() //ordena la lista de pasajes por fecha
         {
-            this._pasajes.Sort(new Ordenes.OrdenPasajePorFecha());
+            this._pasajes.Sort(new OrdenPasajePorFecha());
         }
 
         public List<Pasaje> ObtenerPasajesPorCliente(string documento)

@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dominio;
+using Dominio.Ordenes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
     public class AdminController : Controller
     {
-        public IActionResult Index()
+        private Sistema _sistema = Sistema.Instancia;
+
+        [HttpGet]
+        public IActionResult Clientes()
         {
-            return View();
+            List<Cliente> listaDeClientes = this._sistema.ListarClientesEnUsuarios();
+            listaDeClientes.Sort(new OrdenUsuarioPorDocumento());
+
+            return View(listaDeClientes);
         }
     }
 }

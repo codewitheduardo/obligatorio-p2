@@ -259,19 +259,32 @@ form.compra-form {
     text-align: center;
 }
 
+.card-body input, .form-select {
+    border-radius: 40px;
+}
+
 /* Hero Section */
 .hero {
-    background-image: url('../images/view-3d-airplane-1.png');
+    background-image: url('../images/ThamesLondon_1920x1080.jpg');
     background-size: cover;
     background-position: center;
     min-height: 477px;
     border-radius: 50px;
     margin: 1rem;
     position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.1); /* fondo oscuro translúcido */
+    z-index: 0;
 }
 
 .hero-content {
     padding-top: 126px;
+    z-index: 1;
 }
 
 .search-form {
@@ -290,33 +303,77 @@ form.compra-form {
         font-weight: 600;
     }
 
+/* Card más chica y limpia */
 .card-registro {
+    font-family: 'Open Sans', sans-serif;
     border-radius: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+    max-width: 320px;
+    width: 100%;
+    overflow: hidden;
 }
 
-.registro-header {
-    font-size: 1.15rem; 
+/* Header compacto */
+.card-header {
+    font-size: 1.125rem;
     font-weight: 600;
-    padding: 1rem 0;
+    text-align: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom: 1px solid #ddd;
 }
 
+/* Cuerpo con menos padding y espacio entre elementos */
 .card-body-registro {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    justify-content: center;
+    gap: 0.6rem;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
+.card-body-registro small {
+    font-size: 0.83rem;
+}
+
+/* Inputs más compactos */
 .input-registro {
+    width: 100%;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
     border-radius: 0.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+    .input-registro:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.15rem rgba(0,123,255,0.25);
+        outline: none;
+    }
+
+/* Botón compacto */
 .btn-registro {
-    width: 75%;
-    border-radius: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    width: 95%;
+    padding: 0.55rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    transition: background-color 0.2s;
 }
 
+    .btn-registro:hover {
+        background-color: #0056b3;
+        cursor: pointer;
+    }
 /* Booking Cards */
 .booking-card {
     height: 322px;
@@ -327,12 +384,12 @@ form.compra-form {
     position: relative;
 }
 
-    .booking-card:nth-child(1) {
-        background-image: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg');
+    .booking-card-1 {
+        background-image: url('../images/viaje-paris.jpg');
     }
 
-    .booking-card:nth-child(2) {
-        background-image: url('https://images.pexels.com/photos/1707820/pexels-photo-1707820.jpeg');
+    .booking-card-2 {
+        background-image: url('../images/barcelona-en-dos-dias.jpg');
     }
 
 .card-content {
@@ -368,6 +425,7 @@ form.compra-form {
     justify-content: center;
     color: white;
     font-size: 1.5rem;
+    z-index: 3;
 }
 
 /* More bookings circle */

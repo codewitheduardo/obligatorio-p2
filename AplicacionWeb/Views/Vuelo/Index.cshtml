@@ -5,7 +5,7 @@
 	ViewBag.Title = "Panel de Vuelos";
 }
 
-<div class="py-5">
+<div class="pt-3 pb-5">
 	<h2 class="text-center text-primary fs-1">Panel de Vuelos</h2>
 </div>
 
@@ -28,7 +28,7 @@
 <div id="searchFormContainer" class="search-form-container hidden">
 	<div class="card p-4 mx-auto buscador-card">
 		<h4 class="mb-3 text-primary text-center">Buscar Vuelos</h4>
-		<form method="get" action="~/Vuelos/Buscar" class="aeropuerto-search-vertical">
+		<form method="get" action="~/Vuelo/Buscar" class="aeropuerto-search-vertical">
 			<div class="input-icon">
 				<span class="material-symbols-outlined icon">search</span>
 				<input type="text" name="codSalida" class="aeropuerto-search-input"
@@ -72,16 +72,16 @@
 					<td>@vuelo.Numero</td>
 					<td>$ @vuelo.ObtenerCostoPorAsiento().ToString("F2")</td>
 					<td>
-						<select name="equipaje" class="form-select borde-redondo" required>
-							<option value="">...</option>
+						<select name="equipaje" class="form-select borde-redondo">
+							<option value="null">...</option>
 							@foreach (string equipaje in Enum.GetNames(typeof(Equipaje))) {
 								<option value="@equipaje">@equipaje</option>
 							}
 						</select>
 					</td>
-					<td><input type="date" name="fecha" class="form-control borde-redondo" required /></td>
+					<td><input type="date" name="fecha" class="form-control borde-redondo" /></td>
 					<td>
-						<a href="/Vuelos/Detalle/@vuelo.Numero" class="icono-comprar">
+						<a href="/Vuelo/Detalle/@vuelo.Numero" class="icono-comprar">
 							<span class="material-symbols-outlined">info</span>
 						</a>
 					</td>

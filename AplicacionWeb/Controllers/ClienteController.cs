@@ -7,13 +7,17 @@ namespace AplicacionWeb.Controllers
     {
         private Sistema _sistema = Sistema.Instancia;
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Perfil()
         {
             return View(this._sistema.ListarClientesEnUsuarios()[0]);
         }
 
-        public IActionResult Registro()
+        [HttpGet]
+        public IActionResult Registro(string error)
         {
+            ViewBag.Error = error;
+
             return View();
         }
     }

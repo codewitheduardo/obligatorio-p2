@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,7 +51,7 @@
 							</a>
 						</li>
 						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Vuelos" asp-action="Index">
+							<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Vuelo" asp-action="Index">
 								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
 									flight_takeoff
 								</span>
@@ -67,7 +67,7 @@
 							</a>
 						</li>
 						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Pasaje/MisPasajes">
+							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Pasaje/Todos">
 								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
 									confirmation_number
 								</span>
@@ -75,7 +75,7 @@
 							</a>
 						</li>
 						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" href="#">
+							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Admin/Clientes">
 								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
 									logout
 								</span>
@@ -88,7 +88,7 @@
 
 			<!-- Pie de sidebar -->
 			<div class="p-4">
-				<a href="~/Cliente/Index" class="text-decoration-none">
+				<a href="~/Cliente/Perfil" class="text-decoration-none">
 					<div style="background-color: rgb(242, 246, 251);" class="sidebar-footer rounded shadow-sm p-3 d-flex align-items-center justify-content-between w-100">
 						<div class="d-flex align-items-center gap-2">
 							<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem; position: relative; top: 1px;">
@@ -108,7 +108,7 @@
 		<div class="main-content d-flex flex-column flex-grow-1">
 
 			<!-- Encabezado -->
-			<header class="main-header d-flex flex-wrap justify-content-between align-items-center fixed-top p-4 border-0 me-md-5">
+			<header class="main-header d-flex flex-wrap justify-content-between align-items-center fixed-top px-4 py-3 border-0 me-md-5">
 				<div class="d-flex align-items-center gap-3 mb-3 mb-md-0">
 					<!-- Botón hamburguesa -->
 					<button class="btn btn-link p-0 mb-1" id="menu-toggle">
@@ -121,20 +121,16 @@
 					</a>
 				</div>
 
-				<!-- Buscador -->
-				<div class="search-bar d-flex justify-content-center align-items-center mb-3 mb-md-0">
-					<span class="material-symbols-outlined">
-						search
-					</span>
-					<input type="text" placeholder="¿Que estás buscando?" class="form-control border-0 bg-transparent" />
+				<div class="header-center mb-3 mb-md-0">
+					@RenderSection("HeaderCentro", required: false)
 				</div>
 
 				<!-- Perfil -->
 
 				<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
-					<a href="/Perfil" class="text-decoration-none">
+					<a href="/Cliente/Perfil" class="text-decoration-none">
 						<div class="d-flex align-items-center gap-2">
-							<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative; top: 1px;">
+							<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative;">
 								account_circle
 							</span>
 							<span class="text-dark fw-semibold" style="font-size: 1.05rem;">Eduardo Andrés</span>
@@ -153,7 +149,7 @@
 	<!-- Footer -->
 	<footer class="bg-light text-center text-muted py-4 border-top mt-auto">
 		<div class="container">
-			<p class="mb-0">© @DateTime.Now.Year Aero Airlines. All rights reserved.</p>
+			<p class="mb-1">© @DateTime.Now.Year Aero Airlines. All rights reserved.</p>
 			<small>
 				<a href="#" class="text-muted me-3">Privacy</a>
 				<a href="#" class="text-muted">Terms</a>

@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
-    public class VuelosController : Controller
+    public class VueloController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
+
+        [HttpGet]
         public IActionResult Index(string error, string mensaje)
         {
             ViewBag.Error = error;

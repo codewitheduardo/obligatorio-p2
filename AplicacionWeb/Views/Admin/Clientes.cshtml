@@ -1,0 +1,36 @@
+﻿@using Dominio
+@model List<Cliente>
+
+@{
+	ViewBag.Title = "Clientes";
+}
+
+<div class="pt-3 pb-5">
+	<h2 class="text-center text-primary fs-1">Clientes</h2>
+</div>
+
+<div class="table-container ms-5 me-5 mb-5">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Documento</th>
+				<th>Correo</th>
+				<th>Nombre</th>
+				<th>Nacionalidad</th>
+				<th>Cliente</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Cliente cliente in Model)
+			{
+				<tr>
+					<td>@cliente.Documento</td>
+					<td>@cliente.Correo</td>
+					<td>@cliente.Nombre.ToUpper()</td>
+					<td>@cliente.Nacionalidad</td>
+					<td>@cliente.GetType().Name.ToUpper()</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

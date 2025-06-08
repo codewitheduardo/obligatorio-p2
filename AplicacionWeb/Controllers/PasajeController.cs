@@ -8,20 +8,27 @@ namespace AplicacionWeb.Controllers
         private Sistema _sistema = Sistema.Instancia;
 
         [HttpPost]
-        public IActionResult Comprar(string id, DateTime fecha, Equipaje equipaje)
+        public IActionResult Comprar(string id, DateTime fecha, Equipaje? equipaje)
         {
             try
             {
+                if (equipaje == null)
+                {
+                    throw new Exception("Debe de seleccionar un tipo de equipaje para realizar la compra");
+                }
+
                 Vuelo vuelo = this._sistema.ObtenerVuelo(id);
-                this._sistema.EmitirPasaje(vuelo, fecha, equipaje);
-                return RedirectToAction("Index", "Vuelos", new { mensaje = $"Pasaje reservado para el vuelo {vuelo.Numero} el {fecha.ToString("dd MMM yyyy")}" });
+                this._sistema.EmitirPasaje(vuelo, fecha, equipaje.Value);
+
+                return RedirectToAction("Index", "Vuelo", new { mensaje = $"Pasaje reservado para el vuelo {vuelo.Numero} el {fecha.ToString("dd MMM yyyy")}" });
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index", "Vuelos", new { error = e.Message });
+                return RedirectToAction("Index", "Vuelo", new { error = e.Message });
             }
         }
 
+        [HttpGet]
         public IActionResult MisPasajes()
         {
             this._sistema.OrdenarPasajesPorPrecio();
@@ -29,6 +36,14 @@ namespace AplicacionWeb.Controllers
             Cliente cliente = (Cliente)this._sistema.Usuarios[3];
 
             return View(this._sistema.ObtenerPasajesPorCliente(cliente.Documento));
+        }
+
+        [HttpGet]
+        public IActionResult Todos()
+        {
+            this._sistema.OrdenarPasajesPorFecha();
+
+            return View(this._sistema.Pasajes);
         }
     }
 }
