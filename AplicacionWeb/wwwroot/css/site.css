@@ -169,41 +169,54 @@ main {
 .input-icon {
     position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 
     .input-icon .icon {
         position: absolute;
-        top: 50%;
-        left: 16px;
-        transform: translateY(-50%);
-        color: black !important;
-        font-size: 1.3rem;
+        left: 20px;
+        font-size: 20px;
         pointer-events: none;
     }
 
-.aeropuerto-search-input {
-    width: 100%;
-    padding-left: 40px;
-    border: 2px solid #6c757d !important;
-    border-radius: 32px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    font-size: 1.1rem;
-    outline: none;
-    box-sizing: border-box;
-    transition: background 0.2s;
-    color: black !important;
-    background-color: white !important;
-}
-
-    .aeropuerto-search-input:focus {
-        background-color: #f0f0f0 !important;
+    .input-icon select.aeropuerto-search-input {
+        width: 100%;
+        padding-left: 50px; /* deja espacio para icono search */
+        padding-right: 25px; /* deja espacio para flecha */
+        border: 1.5px solid #6c757d !important;
+        border-radius: 35px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 0.95rem;
+        outline: none;
+        box-sizing: border-box;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        color: #6c757d !important;
+        background-color: white !important;
     }
 
-    .aeropuerto-search-input::placeholder {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 0.8rem;
-        color: #6c757d !important;
+        .input-icon select.aeropuerto-search-input option {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+            line-height: 1.5;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+    .input-icon .material-symbols-outlined:last-child {
+        position: absolute;
+        right: 12px;
+        pointer-events: none;
+        font-size: 24px;
+        color: #6c757d;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
 .aeropuerto-search-button {
@@ -238,7 +251,6 @@ main {
 }
 
     .card-compra .card-header {
-        
         padding: 1.25rem 1.5rem; /* más padding vertical y horizontal */
         font-size: 1.40rem; /* aumenta tamaño de texto */
         font-weight: 600; /* opcional, para que se vea más destacado */
@@ -336,9 +348,9 @@ form.compra-form {
     padding-bottom: 20px;
 }
 
-.card-body-registro small {
-    font-size: 0.83rem;
-}
+    .card-body-registro small {
+        font-size: 0.83rem;
+    }
 
 /* Inputs más compactos */
 .input-registro {
@@ -384,13 +396,13 @@ form.compra-form {
     position: relative;
 }
 
-    .booking-card-1 {
-        background-image: url('../images/viaje-paris.jpg');
-    }
+.booking-card-1 {
+    background-image: url('../images/viaje-paris.jpg');
+}
 
-    .booking-card-2 {
-        background-image: url('../images/barcelona-en-dos-dias.jpg');
-    }
+.booking-card-2 {
+    background-image: url('../images/barcelona-en-dos-dias.jpg');
+}
 
 .card-content {
     position: absolute;
@@ -538,6 +550,24 @@ form.compra-form {
     .boton-sin-estilo .material-symbols-outlined {
         font-size: 1.8rem;
         line-height: 1;
+    }
+
+/* Encabezado más chico */
+.tabla-clientes thead {
+    vertical-align: middle;
+}
+
+    .tabla-clientes thead th {
+        padding: 0.6rem; /* Más compacto */
+    }
+
+/* Filas más compactas */
+.tabla-clientes tbody td {
+    padding: 0.75rem; /* Reduce altura de fila */
+}
+
+    .tabla-clientes tbody td select {
+        color: #6c757d !important;
     }
 
 /* Footer */

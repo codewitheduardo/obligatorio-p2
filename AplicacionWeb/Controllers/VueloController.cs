@@ -1,8 +1,10 @@
-﻿using Dominio;
+﻿using AplicacionWeb.Filters;
+using Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
+    [Authentication]
     public class VueloController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
@@ -12,6 +14,7 @@ namespace AplicacionWeb.Controllers
         {
             ViewBag.Error = error;
             ViewBag.Mensaje = mensaje;
+            ViewBag.Aeropuertos = this._sistema.Aeropuertos;
             return View(this._sistema.Vuelos);
         }
 
@@ -30,6 +33,7 @@ namespace AplicacionWeb.Controllers
                 return RedirectToAction("Index", new { error = "No se encontraron vuelos con los datos ingresados." });
             }
 
+            ViewBag.Aeropuertos = this._sistema.Aeropuertos;
             return View("Index", vuelosFiltrados);
         }
 

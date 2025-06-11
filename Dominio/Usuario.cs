@@ -12,6 +12,11 @@ namespace Dominio
             get { return _correo; }
         }
 
+        public string Password
+        { 
+            get { return _password; }
+        }
+
         public void Validar()
         {
             this.ValidarCorreo();
@@ -53,7 +58,7 @@ namespace Dominio
                 {
                     letras++;
                 }
-  
+
                 if (char.IsDigit(this._password[i]))
                 {
                     numeros++;

@@ -11,6 +11,11 @@ namespace Dominio
     {
         private string _apodo;
 
+        public string Apodo
+        {
+            get { return _apodo; }
+        }
+
         public void Validar()
         {
             this.ValidarApodo();

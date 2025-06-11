@@ -1,8 +1,10 @@
-﻿using Dominio;
+﻿using AplicacionWeb.Filters;
+using Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
+    [Authentication]
     public class PasajeController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
@@ -16,9 +18,9 @@ namespace AplicacionWeb.Controllers
                 {
                     throw new Exception("Debe de seleccionar un tipo de equipaje para realizar la compra");
                 }
-
                 Vuelo vuelo = this._sistema.ObtenerVuelo(id);
-                this._sistema.EmitirPasaje(vuelo, fecha, equipaje.Value);
+                Cliente cliente = this._sistema.ObtenerCliente(HttpContext.Session.GetString("documento"));
+                this._sistema.EmitirPasaje(vuelo, fecha, cliente, equipaje.Value);
 
                 return RedirectToAction("Index", "Vuelo", new { mensaje = $"Pasaje reservado para el vuelo {vuelo.Numero} el {fecha.ToString("dd MMM yyyy")}" });
             }
@@ -32,8 +34,7 @@ namespace AplicacionWeb.Controllers
         public IActionResult MisPasajes()
         {
             this._sistema.OrdenarPasajesPorPrecio();
-
-            Cliente cliente = (Cliente)this._sistema.Usuarios[3];
+            Cliente cliente = this._sistema.ObtenerCliente(HttpContext.Session.GetString("documento"));
 
             return View(this._sistema.ObtenerPasajesPorCliente(cliente.Documento));
         }

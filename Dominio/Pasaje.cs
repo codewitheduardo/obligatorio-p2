@@ -59,6 +59,11 @@ namespace Dominio
                 throw new Exception("Debe de ingresar una fecha para realizar la compra");
             }
 
+            if (this._fecha < DateTime.Today)
+            {
+                throw new Exception("La fecha del pasaje no puede ser anterior a la fecha actual.");
+            }
+
             Dia diaPasaje = (Dia)this._fecha.DayOfWeek;
 
             if (!this._vuelo.Frecuencia.Contains(diaPasaje))

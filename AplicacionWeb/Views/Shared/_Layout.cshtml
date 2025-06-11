@@ -23,122 +23,205 @@
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
 </head>
+
+@{
+	bool logueado = !string.IsNullOrWhiteSpace(Context.Session.GetString("correo"));
+	bool esAdmin = Context.Session.GetString("rol") == "Administrador";
+}
+
 <body class="d-flex flex-column min-vh-100">
 	<div class="d-flex flex-grow-1">
+		@if (logueado)
+		{
+			<!-- Sidebar -->
+			<div id="sidebar-menu" class="sidebar-menu bg-light position-fixed top-0 start-0 h-100 shadow d-flex flex-column justify-content-between" style="width: 350px; transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1050;">
+				<!-- Encabezado -->
+				<div>
+					<div class="header-sidebar d-flex text-decoration-none align-items-center">
+						<img src="~/images/logo.png" alt="Logo de Aero" class="mb-2 me-1 ms-2" style="height: 60px; filter: brightness(0) invert(1);" />
+						<h1 class="text-primary" style="font-size: 30px; filter: brightness(0) invert(1);">Aero.</h1>
+						<button id="close-sidebar" class="btn ms-auto mb-1 me-1 hover-zoom" style="border: none; background-color: transparent;">
+							<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg>
+						</button>
+					</div>
 
-		<!-- Sidebar -->
-		<div id="sidebar-menu" class="sidebar-menu bg-light position-fixed top-0 start-0 h-100 shadow d-flex flex-column justify-content-between" style="width: 350px; transform: translateX(-100%); transition: transform 0.3s ease; z-index: 1050;">
+					<!-- Navegación -->
+					<div class="p-4 mt-1">
 
-			<!-- Encabezado -->
-			<div>
-				<div class="header-sidebar d-flex text-decoration-none align-items-center">
-					<img src="~/images/logo.png" alt="Logo de Aero" class="mb-2 me-1 ms-2" style="height: 60px; filter: brightness(0) invert(1);" />
-					<h1 class="text-primary" style="font-size: 30px; filter: brightness(0) invert(1);">Aero.</h1>
-					<button id="close-sidebar" class="btn ms-auto mb-1 me-1 hover-zoom" style="border: none; background-color: transparent;">
-						<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg>
-					</button>
+						<!--ADMINISTRADOR-->
+						@if (esAdmin)
+						{
+							<ul class="nav flex-column gap-1">
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Inicio">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											home
+										</span>
+										<span>Inicio</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Pasaje" asp-action="Todos">
+										<span class="material-symbols-outlined">
+											sell
+										</span>
+										<span>Ver todos los pasajes</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Admin" asp-action="Clientes">
+										<span class="material-symbols-outlined">
+											manage_accounts
+										</span>
+										<span>Ver/editar clientes</span>
+									</a>
+								</li>
+							</ul>
+						}
+
+						<!--CLIENTE-->
+						@if (!esAdmin)
+						{
+							<ul class="nav flex-column gap-1">
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											home
+										</span>
+										<span>Inicio</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Vuelo" asp-action="Index">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											flight_takeoff
+										</span>
+										<span>Vuelos</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Vuelo" asp-action="Index">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											search
+										</span>
+										<span>Buscar Vuelos</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Pasaje" asp-action="MisPasajes">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											confirmation_number
+										</span>
+										<span>Pasajes Comprados</span>
+									</a>
+								</li>
+								<li class="nav-item mb-3">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Logout">
+										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+											logout
+										</span>
+										<span>Logout</span>
+									</a>
+								</li>
+							</ul>
+						}
+					</div>
 				</div>
 
-				<!-- Navegación -->
-				<div class="p-4 mt-1">
-					<ul class="nav flex-column gap-1">
-						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
-								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
-									home
-								</span>
-								<span>Inicio</span>
-							</a>
-						</li>
-						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Vuelo" asp-action="Index">
-								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
-									flight_takeoff
-								</span>
-								<span>Vuelos</span>
-							</a>
-						</li>
-						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Cliente/Registro">
-								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
-									search
-								</span>
-								<span>Buscar Vuelos</span>
-							</a>
-						</li>
-						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Pasaje/Todos">
-								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
-									confirmation_number
-								</span>
-								<span>Pasajes Comprados</span>
-							</a>
-						</li>
-						<li class="nav-item mb-3">
-							<a class="nav-link text-dark d-flex align-items-center gap-2" href="~/Admin/Clientes">
-								<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
+				@if (esAdmin)
+				{
+					<!-- Pie de sidebar -->
+					<div class="p-4">
+						<a asp-area="" asp-controller="Home" asp-action="Logout" class="text-decoration-none">
+							<div style="background-color: rgb(242, 246, 251);" class="sidebar-footer rounded shadow-sm p-3 d-flex align-items-center justify-content-between w-100">
+								<div class="d-flex align-items-center gap-2">
+									<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem; position: relative; top: 1px;">
+										account_circle
+									</span>
+									<span class="text-dark fw-semibold">Logout</span>
+								</div>
+								<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem; position: relative; top: 1px;">
 									logout
 								</span>
-								<span>Logout</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<!-- Pie de sidebar -->
-			<div class="p-4">
-				<a href="~/Cliente/Perfil" class="text-decoration-none">
-					<div style="background-color: rgb(242, 246, 251);" class="sidebar-footer rounded shadow-sm p-3 d-flex align-items-center justify-content-between w-100">
-						<div class="d-flex align-items-center gap-2">
-							<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem; position: relative; top: 1px;">
-								account_circle
-							</span>
-							<span class="text-dark fw-semibold">Eduardo Andrés</span>
-						</div>
-						<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem;">
-							chevron_right
-						</span>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-		</div>
+				}
 
+				@if (!esAdmin)
+				{
+					<!-- Pie de sidebar -->
+					<div class="p-4">
+						<a asp-area="" asp-controller="Cliente" asp-action="Perfil" class="text-decoration-none">
+							<div style="background-color: rgb(242, 246, 251);" class="sidebar-footer rounded shadow-sm p-3 d-flex align-items-center justify-content-between w-100">
+								<div class="d-flex align-items-center gap-2">
+									<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem; position: relative; top: 1px;">
+										account_circle
+									</span>
+									<span class="text-dark fw-semibold">@Context.Session.GetString("nombre")</span>
+								</div>
+								<span class="material-symbols-outlined text-dark" style="font-size: 1.5rem;">
+									chevron_right
+								</span>
+							</div>
+						</a>
+					</div>
+				}
+			</div>
+		}
 		<!-- Contenido principal -->
 		<div class="main-content d-flex flex-column flex-grow-1">
+			@if (logueado)
+			{
 
-			<!-- Encabezado -->
-			<header class="main-header d-flex flex-wrap justify-content-between align-items-center fixed-top px-4 py-3 border-0 me-md-5">
-				<div class="d-flex align-items-center gap-3 mb-3 mb-md-0">
-					<!-- Botón hamburguesa -->
-					<button class="btn btn-link p-0 mb-1" id="menu-toggle">
-						<i class="bi bi-list" style="font-size: 2rem; color: #0093ff;"></i>
-					</button>
-					<!-- Logo -->
-					<a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex text-decoration-none align-items-center">
-						<img src="~/images/logo.png" alt="Logo de Aero" class="mb-2 me-1" />
-						<h1 class="text-primary">Aero.</h1>
-					</a>
-				</div>
+				<!-- Encabezado -->
+				<header class="main-header d-flex flex-wrap justify-content-between align-items-center fixed-top px-4 py-3 border-0 me-md-5">
+					<div class="d-flex align-items-center gap-3 mb-3 mb-md-0">
+						<!-- Botón hamburguesa -->
+						<button class="btn btn-link p-0 mb-1" id="menu-toggle">
+							<i class="bi bi-list" style="font-size: 2rem; color: #0093ff;"></i>
+						</button>
+						<!-- Logo -->
+						<a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex text-decoration-none align-items-center">
+							<img src="~/images/logo.png" alt="Logo de Aero" class="mb-2 me-1" />
+							<h1 class="text-primary">Aero.</h1>
+						</a>
+					</div>
 
-				<div class="header-center mb-3 mb-md-0">
-					@RenderSection("HeaderCentro", required: false)
-				</div>
+					<div class="header-center mb-3 mb-md-0">
+						@RenderSection("HeaderCentro", required: false)
+					</div>
 
-				<!-- Perfil -->
+					<!-- Perfil -->
+					@if (esAdmin)
+					{
+						<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
+							<a href="#" class="text-decoration-none" style="pointer-events: none;">
+								<div class="d-flex align-items-center gap-2">
+									<span class="material-symbols-outlined text-dark">
+										supervisor_account
+									</span>
+									<span class="text-dark fw-semibold" style="font-size: 1.05rem;">Administrador</span>
+								</div>
+							</a>
+						</nav>
+					}
 
-				<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
-					<a href="/Cliente/Perfil" class="text-decoration-none">
-						<div class="d-flex align-items-center gap-2">
-							<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative;">
-								account_circle
-							</span>
-							<span class="text-dark fw-semibold" style="font-size: 1.05rem;">Eduardo Andrés</span>
-						</div>
-					</a>
-				</nav>
-			</header>
-
+					@if (!esAdmin)
+					{
+						<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
+							<a href="/Cliente/Perfil" class="text-decoration-none">
+								<div class="d-flex align-items-center gap-2">
+									<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative;">
+										account_circle
+									</span>
+									<span class="text-dark fw-semibold" style="font-size: 1.05rem;">@Context.Session.GetString("nombre")</span>
+								</div>
+							</a>
+						</nav>
+					}
+				</header>
+			}
 			<!-- Cuerpo -->
 			<main class="flex-grow-1 pb-5 ps-5 pe-5">
 				@RenderBody()
@@ -146,16 +229,19 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<footer class="bg-light text-center text-muted py-4 border-top mt-auto">
-		<div class="container">
-			<p class="mb-1">© @DateTime.Now.Year Aero Airlines. All rights reserved.</p>
-			<small>
-				<a href="#" class="text-muted me-3">Privacy</a>
-				<a href="#" class="text-muted">Terms</a>
-			</small>
-		</div>
-	</footer>
+	@if (logueado)
+	{
+		<!-- Footer -->
+		<footer class="bg-light text-center text-muted py-4 border-top mt-auto">
+			<div class="container">
+				<p class="mb-1">© @DateTime.Now.Year Aero Airlines. All rights reserved.</p>
+				<small>
+					<a href="#" class="text-muted me-3">Privacy</a>
+					<a href="#" class="text-muted">Terms</a>
+				</small>
+			</div>
+		</footer>
+	}
 
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

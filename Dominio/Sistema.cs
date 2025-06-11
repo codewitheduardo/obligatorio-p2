@@ -129,32 +129,41 @@ namespace Dominio
             return retorno;
         }
 
-        public void ModificarPuntos(string documento, int nuevosPuntos)
+        public void ModificarPuntos(Premium clientePremium, int nuevosPuntos)
         {
-            Cliente cliente = this.ObtenerCliente(documento);
-
-            if (cliente is Premium clientePremium)
+            if (nuevosPuntos < 0)
             {
-                clientePremium.Puntos = nuevosPuntos;
+                throw new Exception("Los puntos no pueden ser negativos.");
             }
-            else
-            {
-                throw new Exception("Este cliente no es premium");
-            }
+            clientePremium.Puntos = nuevosPuntos;
         }
 
-        public void CambiarElegibilidad(string documento, bool nuevoValor)
+        public void CambiarElegibilidad(Ocasional clienteOcasional, bool? nuevoValor)
         {
-            Cliente cliente = this.ObtenerCliente(documento);
+            if (nuevoValor == null)
+            {
+                throw new Exception("Debe especificar la elegibilidad para un cliente ocasional.");
+            }
+            clienteOcasional.ElegibleRegalo = nuevoValor.Value;
+        }
 
-            if (cliente is Ocasional clienteOcasional)
+        public Usuario Login(string correo, string password)
+        {
+            Usuario retorno = null;
+            int i = 0;
+            while (i < this._usuarios.Count && retorno == null)
             {
-                clienteOcasional.ElegibleRegalo = nuevoValor;
+                if (this._usuarios[i].Correo == correo && this._usuarios[i].Password == password)
+                {
+                    retorno = this._usuarios[i];
+                }
+                i++;
             }
-            else
+            if (retorno == null)
             {
-                throw new Exception("Este cliente no es ocasional y no tiene elegibilidad para regalos");
+                throw new Exception("Correo o contraseña inválidos. Verifique e intente nuevamente.");
             }
+            return retorno;
         }
 
         //Aviones
@@ -275,10 +284,8 @@ namespace Dominio
             this._pasajes.Add(pasaje);
         }
 
-        public void EmitirPasaje(Vuelo vuelo, DateTime fecha, Equipaje equipaje)
+        public void EmitirPasaje(Vuelo vuelo, DateTime fecha, Cliente cliente, Equipaje equipaje)
         {
-            Cliente cliente = (Cliente)Usuarios[3];
-
             Pasaje pasaje = new Pasaje(vuelo, fecha, cliente, equipaje);
             pasaje.Validar();
             AgregarPasaje(pasaje);
@@ -326,7 +333,7 @@ namespace Dominio
         private void PrecargarUsuarios()
         {
             // administradores
-            Administrador administrador1 = new Administrador("maria.smith@mail.com", "Maria2023Secure", "ClaveAdminA1");
+            Administrador administrador1 = new Administrador("xeriousuy@gmail.com", "Andres30", "Eduardo");
             AgregarUsuario(administrador1);
 
             Administrador administrador2 = new Administrador("luis.gomez@mail.com", "LuisPass2023", "AdminClave123");
