@@ -9,8 +9,12 @@ namespace AplicacionWeb.Controllers
         private Sistema _sistema = Sistema.Instancia;
 
         [HttpGet]
-        public IActionResult Index(string error)
+        public IActionResult Index()
         {
+            string mensaje = Request.Query["mensaje"];
+            string error = Request.Query["error"];
+
+            ViewBag.Mensaje = mensaje;
             ViewBag.Error = error;
             return View();
         }
@@ -54,8 +58,9 @@ namespace AplicacionWeb.Controllers
 
         [Authentication]
         [HttpGet]
-        public IActionResult Inicio()
+        public IActionResult Inicio(string error)
         {
+            ViewBag.Error = error;
             ViewBag.Vuelos = this._sistema.Vuelos.Count();
             return View();
         }

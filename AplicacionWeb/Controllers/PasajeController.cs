@@ -39,6 +39,7 @@ namespace AplicacionWeb.Controllers
             return View(this._sistema.ObtenerPasajesPorCliente(cliente.Documento));
         }
 
+        [AdminFilter]
         [HttpGet]
         public IActionResult Todos()
         {

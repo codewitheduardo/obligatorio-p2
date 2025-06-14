@@ -10,10 +10,10 @@ namespace AplicacionWeb.Controllers
         private Sistema _sistema = Sistema.Instancia;
 
         [HttpGet]
-        public IActionResult Index(string error, string mensaje)
+        public IActionResult Index(string mensaje, string error)
         {
-            ViewBag.Error = error;
             ViewBag.Mensaje = mensaje;
+            ViewBag.Error = error;
             ViewBag.Aeropuertos = this._sistema.Aeropuertos;
             return View(this._sistema.Vuelos);
         }

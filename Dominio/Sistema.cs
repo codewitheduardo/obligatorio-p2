@@ -112,10 +112,15 @@ namespace Dominio
                 }
                 i++;
             }
+            if (retorno == null)
+            {
+                throw new Exception("El cliente no fue encontrado en el sistema.");
+            }
+
             return retorno;
         }
 
-        public List<Cliente> ListarClientesEnUsuarios() //recorre usuarios y retorna una lista de clientes ordenados por documento
+        public List<Cliente> ListarClientesEnUsuarios() //recorre usuarios y retorna una lista de clientes
         {
             List<Cliente> retorno = new List<Cliente>();
 
@@ -129,7 +134,7 @@ namespace Dominio
             return retorno;
         }
 
-        public void ModificarPuntos(Premium clientePremium, int nuevosPuntos)
+        public void ModificarPuntos(Premium clientePremium, int nuevosPuntos) //modifica los puntos de un cliente premium específico
         {
             if (nuevosPuntos < 0)
             {
@@ -138,7 +143,7 @@ namespace Dominio
             clientePremium.Puntos = nuevosPuntos;
         }
 
-        public void CambiarElegibilidad(Ocasional clienteOcasional, bool? nuevoValor)
+        public void CambiarElegibilidad(Ocasional clienteOcasional, bool? nuevoValor) //modifica la elegibilidad de un cliente ocasinal específico
         {
             if (nuevoValor == null)
             {
@@ -147,7 +152,7 @@ namespace Dominio
             clienteOcasional.ElegibleRegalo = nuevoValor.Value;
         }
 
-        public Usuario Login(string correo, string password)
+        public Usuario Login(string correo, string password) //recorre usuarios y retorna al usuario logueado
         {
             Usuario retorno = null;
             int i = 0;
@@ -260,19 +265,45 @@ namespace Dominio
                 }
                 i++;
             }
+            if (retorno == null)
+            {
+                throw new Exception("El vuelo no fue encontrado en el sistema.");
+            }
             return retorno;
         }
 
-        public List<Vuelo> ListarVuelosPorAeropuertos(string codSalida, string codLlegada) //recorre vuelos y retorna una lista de vuelos por aeropuertos especificos
+        public List<Vuelo> ListarVuelosPorAeropuertos(string codSalida, string codLlegada) //recorre vuelos y retorna una lista de vuelos filtrada por aeropuertos especificos
         {
             List<Vuelo> retorno = new List<Vuelo>();
 
             foreach (Vuelo vuelo in this._vuelos)
             {
-                if ((string.IsNullOrWhiteSpace(codSalida) || vuelo.Ruta.Salida.Codigo.ToUpper() == codSalida.ToUpper()) &&
-                    (string.IsNullOrWhiteSpace(codLlegada) || vuelo.Ruta.Llegada.Codigo.ToUpper() == codLlegada.ToUpper()))
+                string salida = vuelo.Ruta.Salida.Codigo.ToUpper();
+                string llegada = vuelo.Ruta.Llegada.Codigo.ToUpper();
+
+                bool ingresoSalida = !string.IsNullOrWhiteSpace(codSalida);
+                bool ingresoLlegada = !string.IsNullOrWhiteSpace(codLlegada);
+
+                if (ingresoSalida && ingresoLlegada)
                 {
-                    retorno.Add(vuelo);
+                    if (salida == codSalida.ToUpper() && llegada == codLlegada.ToUpper())
+                    {
+                        retorno.Add(vuelo);
+                    }
+                }
+                else if (ingresoSalida)
+                {
+                    if (salida == codSalida.ToUpper() || llegada == codSalida.ToUpper())
+                    {
+                        retorno.Add(vuelo);
+                    }
+                }
+                else if (ingresoLlegada)
+                {
+                    if (salida == codLlegada.ToUpper() || llegada == codLlegada.ToUpper())
+                    {
+                        retorno.Add(vuelo);
+                    }
                 }
             }
             return retorno;
@@ -315,7 +346,7 @@ namespace Dominio
             this._pasajes.Sort(new OrdenPasajePorFecha());
         }
 
-        public List<Pasaje> ObtenerPasajesPorCliente(string documento)
+        public List<Pasaje> ObtenerPasajesPorCliente(string documento) //busca pasajes específicos
         {
             List<Pasaje> retorno = new List<Pasaje>();
 
@@ -333,10 +364,10 @@ namespace Dominio
         private void PrecargarUsuarios()
         {
             // administradores
-            Administrador administrador1 = new Administrador("xeriousuy@gmail.com", "Andres30", "Eduardo");
+            Administrador administrador1 = new Administrador("cvargas@mail.com", "cvargas123", "Carlos");
             AgregarUsuario(administrador1);
 
-            Administrador administrador2 = new Administrador("luis.gomez@mail.com", "LuisPass2023", "AdminClave123");
+            Administrador administrador2 = new Administrador("luis.gomez@mail.com", "LuisPass2023", "Luis");
             AgregarUsuario(administrador2);
 
             // clientes premium

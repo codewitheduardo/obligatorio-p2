@@ -32,7 +32,7 @@
 			<div class="input-icon">
 				<span class="material-symbols-outlined icon">search</span>
 				<select name="codSalida" class="aeropuerto-search-input">
-					<option value="" disabled selected>Aeropuerto de salida</option>
+					<option value="" disabled selected>Aeropuerto - Origen</option>
 					@foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
 					{
 						<option value="@aeropuerto.Codigo">@aeropuerto.Codigo - @aeropuerto.Ciudad</option>
@@ -45,7 +45,7 @@
 			<div class="input-icon">
 				<span class="material-symbols-outlined icon">search</span>
 				<select name="codLlegada" class="aeropuerto-search-input">
-					<option value="" disabled selected>Aeropuerto de llegada</option>
+					<option value="" disabled selected>Aeropuerto - Destino</option>
 					@foreach (Aeropuerto aeropuerto in ViewBag.Aeropuertos)
 					{
 						<option value="@aeropuerto.Codigo">@aeropuerto.Codigo - @aeropuerto.Ciudad</option>

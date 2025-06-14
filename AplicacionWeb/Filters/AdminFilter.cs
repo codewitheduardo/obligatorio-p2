@@ -9,9 +9,13 @@ namespace AplicacionWeb.Filters
         {
             string logueado = context.HttpContext.Session.GetString("rol");
 
-            if (logueado != "Administrador")
+            if (string.IsNullOrWhiteSpace(logueado))
             {
                 context.Result = new RedirectToActionResult("Index", "Home", new { error = "Debe de iniciar sesión como administrador." });
+            }
+            if (logueado != "Administrador")
+            {
+                context.Result = new RedirectToActionResult("Inicio", "Home", new { error = "Acceso restringido." });
             }
             base.OnActionExecuted(context);
         }

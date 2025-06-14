@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
-    [Authentication]
+    [AdminFilter]
     public class AdminController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
 
         [HttpGet]
-        public IActionResult Clientes(string error)
+        public IActionResult Clientes(string mensaje, string error)
         {
+            ViewBag.Mensaje = mensaje;
             ViewBag.Error = error;
             List<Cliente> listaDeClientes = this._sistema.ListarClientesEnUsuarios();
-            listaDeClientes.Sort(new OrdenUsuarioPorDocumento());
+            listaDeClientes.Sort();
 
             return View(listaDeClientes);
         }
@@ -36,7 +37,7 @@ namespace AplicacionWeb.Controllers
                 {
                     this._sistema.CambiarElegibilidad(clienteOcasional, nuevoValor);
                 }
-                return RedirectToAction("Clientes");
+                return RedirectToAction("Clientes", new { mensaje = $"El cliente {cliente.Nombre} se ha editado con éxito." });
             }
             catch (Exception e)
             {

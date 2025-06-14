@@ -36,11 +36,11 @@ namespace Dominio
 
         public void Validar()
         {
-            this.ValidarNumeroVuelo();
+            this.ValidarNumero();
             this.ValidarDistancia();
         }
 
-        private void ValidarNumeroVuelo()
+        private void ValidarNumero()
         {
             if (string.IsNullOrWhiteSpace(this._numero) || this._numero.Length < 3)
             {

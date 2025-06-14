@@ -7,7 +7,7 @@ using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public abstract class Cliente : Usuario, IValidable
+    public abstract class Cliente : Usuario, IValidable, IComparable<Cliente>
     {
         private string _documento;
         private string _nombre;
@@ -77,6 +77,11 @@ namespace Dominio
             if (obj == null || !(obj is Cliente)) return false;
             Cliente otro = (Cliente)obj;
             return this._documento.Equals(otro._documento);
+        }
+
+        public int CompareTo(Cliente? other)
+        {
+            return this._documento.CompareTo(other._documento);
         }
     }
 }

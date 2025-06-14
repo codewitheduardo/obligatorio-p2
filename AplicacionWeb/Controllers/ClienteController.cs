@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacionWeb.Controllers
 {
-    [Authentication]
     public class ClienteController : Controller
     {
         private Sistema _sistema = Sistema.Instancia;
 
+        [Authentication]
         [HttpGet]
         public IActionResult Perfil()
         {
@@ -30,19 +30,12 @@ namespace AplicacionWeb.Controllers
             {
                 this._sistema.AltaClienteOcasional(correo, password, documento, nombre, nacionalidad);
 
-                return RedirectToAction("Index", "Home", new { mensaje = $"El cliente con el documento {documento} se registró correctamente." });
+                return RedirectToAction("Index", "Home", new { mensaje = "¡Registro exitoso! Tu cuenta fue creada correctamente." });
             }
             catch (Exception e)
             {
                 return RedirectToAction("Registro", "Cliente", new { error = e.Message });
             }
-        }
-
-        [HttpGet]
-        
-        public IActionResult Login()
-        {
-            return View();
         }
     }
 }

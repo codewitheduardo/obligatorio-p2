@@ -9,6 +9,11 @@
 	<h2 class="text-center text-primary fs-1">Clientes</h2>
 </div>
 
+@if (ViewBag.Mensaje != null)
+{
+	<div class="alert alert-success text-center mb-5">@ViewBag.Mensaje</div>
+}
+
 @if (ViewBag.Error != null)
 {
 	<div class="alert alert-danger text-center mb-5">@ViewBag.Error</div>
@@ -43,7 +48,7 @@
 						{
 						<td>@clientePremium.Puntos</td>
 						<td>
-							<input type="number" name="nuevosPuntos" class="form-select borde-redondo" placeholder="Puntos" />
+							<input type="number" name="nuevosPuntos" class="form-select input-sin-flechas borde-redondo" placeholder="Puntos" />
 						</td>
 						}
 						else if (cliente is Ocasional clienteOcasional)

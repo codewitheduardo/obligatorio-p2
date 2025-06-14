@@ -24,6 +24,11 @@
 }
 }
 
+@if (ViewBag.Error != null)
+{
+	<div class="alert alert-danger text-center">@ViewBag.Error</div>
+}
+
 <div class="container-fluid">
 	<div class="row">
 

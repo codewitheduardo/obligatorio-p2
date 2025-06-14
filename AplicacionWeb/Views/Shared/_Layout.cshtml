@@ -26,6 +26,7 @@
 
 @{
 	bool logueado = !string.IsNullOrWhiteSpace(Context.Session.GetString("correo"));
+	bool esPremium = Context.Session.GetInt32("puntos") != null;
 	bool esAdmin = Context.Session.GetString("rol") == "Administrador";
 }
 
@@ -84,7 +85,7 @@
 						{
 							<ul class="nav flex-column gap-1">
 								<li class="nav-item mb-3">
-									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+									<a class="nav-link text-dark d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Inicio">
 										<span class="material-symbols-outlined" style="font-size: 1.5rem; position: relative; top: 1px;">
 											home
 										</span>
@@ -173,53 +174,53 @@
 		<div class="main-content d-flex flex-column flex-grow-1">
 			@if (logueado)
 			{
-
-				<!-- Encabezado -->
-				<header class="main-header d-flex flex-wrap justify-content-between align-items-center fixed-top px-4 py-3 border-0 me-md-5">
-					<div class="d-flex align-items-center gap-3 mb-3 mb-md-0">
-						<!-- Botón hamburguesa -->
+				<!--Header-->
+				<header class="main-header d-flex align-items-center px-4 py-3 fixed-top border-0 me-md-5" style="width: 100%;">
+					<!-- Izquierda: botón hamburguesa + logo -->
+					<div class="header-left d-flex align-items-center gap-3 flex-shrink-0" style="max-width: 320px;">
 						<button class="btn btn-link p-0 mb-1" id="menu-toggle">
 							<i class="bi bi-list" style="font-size: 2rem; color: #0093ff;"></i>
 						</button>
-						<!-- Logo -->
-						<a asp-area="" asp-controller="Home" asp-action="Index" class="d-flex text-decoration-none align-items-center">
+						<a asp-area="" asp-controller="Home" asp-action="Inicio" class="d-flex text-decoration-none align-items-center">
 							<img src="~/images/logo.png" alt="Logo de Aero" class="mb-2 me-1" />
 							<h1 class="text-primary">Aero.</h1>
 						</a>
 					</div>
 
-					<div class="header-center mb-3 mb-md-0">
+					<!-- Centro: contenido centrado -->
+					<div class="header-center flex-grow-1 d-flex justify-content-center align-items-center text-center" style="min-width: 0;">
 						@RenderSection("HeaderCentro", required: false)
 					</div>
 
-					<!-- Perfil -->
-					@if (esAdmin)
-					{
-						<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
-							<a href="#" class="text-decoration-none" style="pointer-events: none;">
-								<div class="d-flex align-items-center gap-2">
-									<span class="material-symbols-outlined text-dark">
-										supervisor_account
-									</span>
-									<span class="text-dark fw-semibold" style="font-size: 1.05rem;">Administrador</span>
-								</div>
-							</a>
-						</nav>
-					}
-
-					@if (!esAdmin)
-					{
-						<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
-							<a href="/Cliente/Perfil" class="text-decoration-none">
-								<div class="d-flex align-items-center gap-2">
-									<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative;">
-										account_circle
-									</span>
-									<span class="text-dark fw-semibold" style="font-size: 1.05rem;">@Context.Session.GetString("nombre")</span>
-								</div>
-							</a>
-						</nav>
-					}
+					<!-- Derecha: perfil y puntos -->
+					<div class="header-right d-flex align-items-center gap-2 flex-shrink-0" style="max-width: 320px; justify-content: flex-end;">
+						@if (esAdmin)
+						{
+							<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
+								<a href="#" class="text-decoration-none" style="pointer-events: none;">
+									<div class="d-flex align-items-center gap-2">
+										<span class="material-symbols-outlined text-dark">supervisor_account</span>
+										<span class="text-dark fw-semibold" style="font-size: 1.05rem;">Administrador</span>
+									</div>
+								</a>
+							</nav>
+						}
+						@if (!esAdmin)
+						{
+							<nav class="header-nav d-none d-md-flex flex-column flex-md-row gap-md-4">
+								<a href="/Cliente/Perfil" class="text-decoration-none">
+									<div class="d-flex align-items-center gap-2">
+										@if (esPremium)
+										{
+											<span class="user-points-badge">@Context.Session.GetInt32("puntos") p</span>
+										}
+										<span class="material-symbols-outlined text-dark" style="font-size: 1.30rem; position: relative;">account_circle</span>
+										<span class="text-dark fw-semibold" style="font-size: 1.05rem;">@Context.Session.GetString("nombre")</span>
+									</div>
+								</a>
+							</nav>
+						}
+					</div>
 				</header>
 			}
 			<!-- Cuerpo -->
